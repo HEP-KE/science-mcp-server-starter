@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fast-mcp-tool-server-starter"
+version = "0.1.0"
+description = "Minimal FastMCP tool server starter that exposes package functions as MCP tools."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.27,<2",
+    "science-demo",
+    # Add your external repo for more MCP tools:
+    # "your-science-package @ git+https://github.com/YOUR_ORG/your-science-package.git@main",
+    # Keep the local science-demo package as a working example, or remove it later.
+]
+
+[project.scripts]
+fast-mcp-starter = "fast_mcp_starter.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.uv.sources]
+# Local demo package source. Add external repos here too when using uv:
+# your-science-package = { git = "https://github.com/YOUR_ORG/your-science-package.git", rev = "main" }
+science-demo = { path = "science-demo", editable = true }
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "science-demo/src"]
+testpaths = ["tests", "science-demo/tests"]
