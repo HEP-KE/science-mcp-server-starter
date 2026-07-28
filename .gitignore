@@ -8,4 +8,10 @@ dist/
 build/
 *.egg-info/
 out/
+output*/
+agent-output*/
+checkpoint.db
+*.db
+*.sqlite
+data/
 .DS_Store

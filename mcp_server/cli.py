@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import argparse
 
 from .server import run_server
@@ -7,14 +5,14 @@ from .server import run_server
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="fast-mcp-starter",
-        description="Run the FastMCP tool server starter.",
+        prog="mcp-server",
+        description="Run the MCP server wrapper.",
     )
     parser.add_argument(
         "--transport",
-        choices=("stdio", "streamable-http", "http"),
+        choices=("stdio", "streamable-http"),
         default="stdio",
-        help="MCP transport. Use stdio for subprocess agents or streamable-http/http for a URL endpoint.",
+        help="MCP transport. Use stdio for subprocess agents or streamable-http for a URL endpoint.",
     )
     parser.add_argument(
         "--host",
@@ -27,11 +25,6 @@ def build_parser() -> argparse.ArgumentParser:
         default=8000,
         help="Port for streamable-http transport.",
     )
-    parser.add_argument(
-        "--json-response",
-        action="store_true",
-        help="Use JSON responses for streamable-http instead of SSE stream responses.",
-    )
     return parser
 
 
@@ -41,6 +34,5 @@ def main() -> int:
         transport=args.transport,
         host=args.host,
         port=args.port,
-        json_response=args.json_response,
     )
     return 0
